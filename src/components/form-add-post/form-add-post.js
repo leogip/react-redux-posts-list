@@ -15,23 +15,21 @@ class FormAddPost extends Component {
 
   submitHandler = event => {
     event.preventDefault();
-
     const { title, text } = this.state;
-
-    const newPost = {
-      title,
-      text,
-      id: Date.now().toString()
-    };
 
     if (!title.trim()) {
       this.props.showAlert({
         color: 'warning',
         text: 'Please, enter title post'
       });
+      return;
     }
 
-    this.props.createPost(newPost);
+    this.props.createPost({
+      title,
+      text,
+      id: Date.now().toString()
+    });
 
     this.setState({ title: '', text: '' });
   };
@@ -47,9 +45,7 @@ class FormAddPost extends Component {
   render() {
     return (
       <div>
-        {this.props.alert && (
-          <Alert color={this.props.alert.color} text={this.props.alert.text} />
-        )}
+        {this.props.alert && <Alert alert={this.props.alert} />}
 
         <form onSubmit={this.submitHandler}>
           <div className="form-group">

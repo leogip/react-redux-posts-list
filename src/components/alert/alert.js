@@ -1,9 +1,7 @@
 import React from 'react';
 
-export default function Alert({ color, text }) {
-  return (
-    <div class={`alert alert-${color}`} role="alert">
-      {text}
-    </div>
-  );
-}
+export default ({ alert }) => (
+  <div className={`alert alert-${alert.color}`} role="alert">
+    {alert.text}
+  </div>
+);
